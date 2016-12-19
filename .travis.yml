@@ -11,13 +11,14 @@ matrix:
     - php: 5.6
       env: PECLEVENT=1
     - php: 7
-      env: PECLEVENT=1 PECLINI=1
+      env: PECLEVENT=1
+    - php: 7.1
+      env: PECLEVENT=1
   allow_failures:
     - php: hhvm
 
 before_script:
   - if [[ $PECLEVENT = 1 ]]; then yes \"\" | pecl install event; fi
-  - if [[ $PECLINI = 1 ]]; then echo 'extension = event.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
   - composer self-update
   - composer install --dev
   - mkdir -p build/logs
